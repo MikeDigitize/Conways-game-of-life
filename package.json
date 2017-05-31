@@ -1,0 +1,30 @@
+{
+  "name": "coderetreat-fe",
+  "version": "1.0.0",
+  "description": "Front End Coderetreat and Katas",
+  "main": "index.js",
+  "dependencies": {
+    "babel-cli": "^6.24.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.24.1",
+    "babel-polyfill": "^6.23.0",
+    "babel-preset-env": "^1.4.0",
+    "babel-register": "^6.24.1",
+    "mocha": "^3.3.0"
+  },
+  "scripts": {
+    "test": "mocha --compilers js:babel-register --watch",
+    "build": "babel src -d dist --source-maps"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rosudrag/coderetreat-fe.git"
+  },
+  "author": "Dragos Romario Rosu",
+  "license": "GENERAL PUBLIC LICENSE",
+  "bugs": {
+    "url": "https://github.com/rosudrag/coderetreat-fe/issues"
+  },
+  "homepage": "https://github.com/rosudrag/coderetreat-fe#readme"
+}
