@@ -16,13 +16,19 @@ export default class Game {
 
 		// test if any live cells exist
 		const isAlive = !!this.grid.filter(isLiveCell).length;
-		console.log(isAlive);
 
 		// loop through grid
 
 			//	test relations for dead cells
 
 				//	Any dead cell with exactly three live neighbours becomes a live cell
+
+		if(isAlive) {
+			const deadCells = this.grid.filter(isDeadCell);
+			if(deadCells.length) {
+				deadCells.forEach(makeDeadCellsLive, this);
+			}
+		}		
 
 			//	test relations for live cells
 
@@ -34,6 +40,38 @@ export default class Game {
 
 	}
 
+}
+
+function makeDeadCellsLive(cell) {
+	const liveRelationsIndexes = getAllLiveNeighboursIndexes(cell);
+	const liveRelations = liveRelationsIndexes.map(index => this.grid[index]);
+	if(liveRelations.length === 3) {
+		console.log('Cell should live!');
+	}
+	else {
+		console.log('Cell should stay dead!');	
+	}
+}
+
+function getAllLiveNeighboursIndexes(cell) {
+
+	const { neighbours } = cell;
+
+	const liveNeighbours = 
+		Object.keys(neighbours)
+			.map(function(key) {
+				return neighbours[key];
+			})
+			.filter(function(value) {
+				return value !== null;
+			});
+
+	return liveNeighbours;
+
+}
+
+function isDeadCell(cell) {
+	return cell.state === 0;
 }
 
 function isLiveCell(cell) {
