@@ -1,5 +1,5 @@
 {
-  "name": "coderetreat-fe",
+  "name": "conways-game-of-life",
   "version": "1.0.0",
   "description": "Front End Coderetreat and Katas",
   "main": "index.js",
@@ -19,12 +19,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rosudrag/coderetreat-fe.git"
+    "url": "git+https://github.com/MikeDigitize/Conways-game-of-life.git"
   },
   "author": "Dragos Romario Rosu",
   "license": "GENERAL PUBLIC LICENSE",
   "bugs": {
-    "url": "https://github.com/rosudrag/coderetreat-fe/issues"
+    "url": "https://github.com/MikeDigitize/Conways-game-of-life/issues"
   },
-  "homepage": "https://github.com/rosudrag/coderetreat-fe#readme"
+  "homepage": "https://github.com/MikeDigitize/Conways-game-of-life#readme"
 }

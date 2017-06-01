@@ -1,10 +1,14 @@
 export class Cell {
 	constructor(state = 0, index = 0, gridSize = 0) {
 		this.state = state;
+
 		this.neighbours = {};
 		this.neighbours.left = getLeft(index, gridSize);
 		this.neighbours.topLeft = getTopLeft(index, gridSize);
 		this.neighbours.bottomLeft = getBottomLeft(index, gridSize);
+
+		this.neighbours.top = getTop(index, gridSize);
+		this.neighbours.bottom = getBottom(index, gridSize);
 	}
 }
 
@@ -41,5 +45,24 @@ function getBottomLeft(index, gridSize) {
 	}
 	else {
 		return index + --gridSize;
+	}
+}
+
+function getTop(index, gridSize) {
+	if(index < gridSize) {
+		return null;
+	}
+	else {
+		return index - gridSize;
+	}
+}
+
+function getBottom(index, gridSize) {
+	const min = (gridSize * gridSize) - gridSize;
+	if(index > min) {
+		return null;
+	}
+	else {
+		return index + gridSize;
 	}
 }
