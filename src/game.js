@@ -26,8 +26,14 @@ export default class Game {
 		if(isAlive) {
 			const deadCells = this.grid.filter(isDeadCell);
 			if(deadCells.length) {
-				deadCells.forEach(makeDeadCellsLive, this);
+				deadCells.forEach(checkDeadCells, this);
 			}
+			else {
+				return gameOver();
+			}
+		}
+		else {
+			return gameOver();
 		}		
 
 			//	test relations for live cells
@@ -42,8 +48,12 @@ export default class Game {
 
 }
 
-function makeDeadCellsLive(cell) {
-	const liveRelationsIndexes = getAllLiveNeighboursIndexes(cell);
+function gameOver() {
+	return 'Game Over';
+}
+
+function checkDeadCells(cell) {
+	const liveRelationsIndexes = getAllLiveNeighbourIndexes(cell);
 	const liveRelations = liveRelationsIndexes.map(index => this.grid[index]);
 	if(liveRelations.length === 3) {
 		console.log('Cell should live!');
@@ -53,7 +63,7 @@ function makeDeadCellsLive(cell) {
 	}
 }
 
-function getAllLiveNeighboursIndexes(cell) {
+export function getAllLiveNeighbourIndexes(cell) {
 
 	const { neighbours } = cell;
 
