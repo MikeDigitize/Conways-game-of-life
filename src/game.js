@@ -14,35 +14,19 @@ export default class Game {
 
 	tick() {
 
-		// test if any live cells exist
-		const isAlive = !!this.grid.filter(isLiveCell).length;
+		const { grid } = this;
+		const numOfLiveCells = grid.filter(isLiveCell).length;
 
-		// loop through grid
-
-			//	test relations for dead cells
-
-				//	Any dead cell with exactly three live neighbours becomes a live cell
-
-		if(isAlive) {
-			const deadCells = this.grid.filter(isDeadCell);
-			if(deadCells.length) {
-				deadCells.forEach(checkDeadCells, this);
-			}
-			else {
-				return gameOver();
-			}
+		if(numOfLiveCells > 0 && grid.length !== numOfLiveCells) {
+			grid.forEach(function(cell) {
+				const neighbourIndexes = getAllNeighbourIndexes(cell);
+      	const neighbours = getAllNeighbours(grid, neighbourIndexes);
+      	setCellLife(cell, neighbours);
+			});      
 		}
 		else {
 			return gameOver();
 		}		
-
-			//	test relations for live cells
-
-				//	any live cell with fewer than two live neighbours dies, as if caused by underpopulation
-
-				//	any live cell with more than three live neighbours dies, as if by overcrowding
-
-				//	any live cell with two or three live neighbours lives on to the next generation
 
 	}
 
@@ -50,17 +34,6 @@ export default class Game {
 
 function gameOver() {
 	return 'Game Over';
-}
-
-function checkDeadCells(cell) {
-	const liveRelationsIndexes = getAllNeighbourIndexes(cell);
-	const liveRelations = liveRelationsIndexes.map(index => this.grid[index]);
-	if(liveRelations.length === 3) {
-		console.log('Cell should live!');
-	}
-	else {
-		console.log('Cell should stay dead!');	
-	}
 }
 
 export function getAllNeighbourIndexes(cell) {
@@ -103,14 +76,6 @@ export function setCellLife(cell, neighbours) {
 			cell.state = 0;
 		}
 	}
-}
-
-export function getAllDeadNeighbours(neighbours) {
-	return neighbours.filter(isDeadCell);
-}
-
-function isDeadCell(cell) {
-	return cell.state === 0;
 }
 
 function isLiveCell(cell) {
