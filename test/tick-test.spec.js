@@ -13,23 +13,6 @@ describe('Game of life', function() {
 
         describe('Grid size of 1', function() {
 
-            it('should end a game with a grid size of 1 and a live cell', function() {
-                const gridSize = 1;
-                const seed = {
-                    0: 1
-                };
-                const game = new Game(gridSize, seed);
-                const result = game.tick();
-                assert.equal(result, 'Game Over');
-            });
-
-            it('should end a game with a grid size of 1 and a dead cell', function() {
-                const gridSize = 1;
-                const game = new Game(gridSize);
-                const result = game.tick();
-                assert.equal(result, 'Game Over');
-            });
-
             it('should return no relations of a cell in a 1x1 grid', function() {
                 const index = 0;
                 const gridSize = 1;
@@ -331,6 +314,86 @@ describe('Game of life', function() {
                 assert.equal(cell.state, 1);
                 setCellLife(cell, neighbours);
                 assert.equal(cell.state, 0);
+            });
+
+        });
+
+        describe('Tick method', function() {
+
+            it('should end a game with a grid size of 1 and a live cell', function() {
+                const gridSize = 1;
+                const seed = {
+                    0: 1
+                };
+                const game = new Game(gridSize, seed);
+                const result = game.tick();
+                assert.equal(result, false);
+            });
+
+            it('should end a game with a grid size of 1 and a dead cell', function() {
+                const gridSize = 1;
+                const game = new Game(gridSize);
+                const result = game.tick();
+                assert.equal(result, false);
+            });
+
+            it('should end after 1 tick with a grid of 2 and 2 live cells', function() {
+                const gridSize = 2;
+                const seed = {
+                    0: 1,
+                    1: 1
+                };
+                const game = new Game(gridSize, seed);
+                let result = game.tick();
+                assert.equal(result, true);
+                result = game.tick();
+                assert.equal(result, false);
+            });
+
+            it('should end after 1 tick with a grid of 2 and 3 live cells', function() {
+                const gridSize = 2;
+                const seed = {
+                    0: 1,
+                    1: 1,
+                    2: 1
+                };
+                const game = new Game(gridSize, seed);
+                let result = game.tick();
+                assert.equal(result, true);
+                result = game.tick();
+                assert.equal(result, false);
+            });
+
+            it('should continue forever with a grid of 3 and 3 live cells', function() {
+                const gridSize = 3;
+                const seed = {
+                    0: 1,
+                    3: 1,
+                    4: 1
+                };
+                const game = new Game(gridSize, seed);
+                let result = game.tick();
+                assert.equal(result, true);                
+                result = game.tick();
+                assert.equal(result, true);
+                result = game.tick();
+                assert.equal(result, true);
+            });
+
+            it('should continue forever with a grid of 3 and 3 live cells', function() {
+                const gridSize = 3;
+                const seed = {
+                    1: 1,
+                    2: 1,
+                    4: 1
+                };
+                const game = new Game(gridSize, seed);
+                let result = game.tick();
+                assert.equal(result, true);                
+                result = game.tick();
+                assert.equal(result, true);
+                result = game.tick();
+                assert.equal(result, true);
             });
 
         });

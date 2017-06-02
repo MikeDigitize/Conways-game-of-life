@@ -22,18 +22,15 @@ export default class Game {
 				const neighbourIndexes = getAllNeighbourIndexes(cell);
       	const neighbours = getAllNeighbours(grid, neighbourIndexes);
       	setCellLife(cell, neighbours);
-			});      
+			});    
+			return true;  
 		}
 		else {
-			return gameOver();
+			return false;
 		}		
 
 	}
 
-}
-
-function gameOver() {
-	return 'Game Over';
 }
 
 export function getAllNeighbourIndexes(cell) {
