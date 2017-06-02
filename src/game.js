@@ -53,7 +53,7 @@ function gameOver() {
 }
 
 function checkDeadCells(cell) {
-	const liveRelationsIndexes = getAllLiveNeighbourIndexes(cell);
+	const liveRelationsIndexes = getAllNeighbourIndexes(cell);
 	const liveRelations = liveRelationsIndexes.map(index => this.grid[index]);
 	if(liveRelations.length === 3) {
 		console.log('Cell should live!');
@@ -63,21 +63,50 @@ function checkDeadCells(cell) {
 	}
 }
 
-export function getAllLiveNeighbourIndexes(cell) {
+export function getAllNeighbourIndexes(cell) {
 
 	const { neighbours } = cell;
 
-	const liveNeighbours = 
-		Object.keys(neighbours)
+	return Object.keys(neighbours)
 			.map(function(key) {
 				return neighbours[key];
 			})
 			.filter(function(value) {
 				return value !== null;
+			})
+			.sort(function(a, b) {
+				return a - b;
 			});
 
-	return liveNeighbours;
+}
 
+export function getAllNeighbours(grid, indexes) {
+	return indexes.map(function(i) {
+		return grid.filter((_, j) => i === j).shift();
+	});
+}
+
+export function getAllLiveNeighbours(neighbours) {
+	return neighbours.filter(isLiveCell);
+}
+
+export function setCellLife(cell, neighbours) {
+	if(cell.state === 0) {
+		const liveNeighbours = getAllLiveNeighbours(neighbours);
+		if(liveNeighbours.length === 3) {
+			cell.state = 1;
+		}
+	}
+	else {
+		const liveNeighbours = getAllLiveNeighbours(neighbours);
+		if(liveNeighbours.length < 2 || liveNeighbours.length > 3) {
+			cell.state = 0;
+		}
+	}
+}
+
+export function getAllDeadNeighbours(neighbours) {
+	return neighbours.filter(isDeadCell);
 }
 
 function isDeadCell(cell) {
