@@ -1,7 +1,26 @@
+const GRID_CONTAINER_SELECTOR = 'grid-container';
+const GRID_CONTAINER_WIDTH = 600;
+
 export default class Grid {
 	constructor(gridSize, seed = {}) {
 		this.dom = createGrid(gridSize, seed);
 	}
+	append(parent) {
+		appendGrid(this.dom, parent);
+	}
+
+}
+
+function appendGrid(grid, parent = document.body) {
+	const container = document.createElement('div');
+	container.classList.add(GRID_CONTAINER_SELECTOR);
+	container.style.setProperty('width', `${GRID_CONTAINER_WIDTH}px`);
+	const frag = document.createDocumentFragment();
+	grid.forEach(function(row) {
+		container.appendChild(row);
+	});
+	frag.appendChild(container);
+	parent.appendChild(frag);
 }
 
 function createGrid(gridSize, seed) {
@@ -9,7 +28,7 @@ function createGrid(gridSize, seed) {
 	const cells = [];
 	const rows = [];
 	for(let i = 0; i < size; i++) {
-		cells.push(createCell(seed[i]));
+		cells.push(createCell(gridSize, seed[i]));
 		if((i + 1) % gridSize === 0) {
 			rows.push(wrapRow(cells));
 			cells.length = 0;
@@ -18,9 +37,12 @@ function createGrid(gridSize, seed) {
 	return rows;
 }
 
-function createCell(state = 0) {
+function createCell(gridSize, state = 0) {
 	const cell = document.createElement('span');
+	const width = (GRID_CONTAINER_WIDTH / gridSize).toFixed(2);
 	cell.classList.add('cell');
+	cell.style.setProperty('width', `${width}px`);
+	cell.style.setProperty('height', `${width}px`);
 	if(state === 1) {
 		cell.classList.add('alive');
 	}

@@ -1,3 +1,4 @@
-import Game from './game';
+import Grid from './grid';
 
-window.Game = Game;
+const grid = new Grid(10, { 0: 1, 15: 1, 81: 1});
+grid.append();

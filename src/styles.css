@@ -1,15 +1,17 @@
-.container {
-	width: 600px;
+.grid-container {
 	margin: auto;
+}
+.row {
 	display: flex;
 }
 .cell {
 	flex: 1;
-  height: 200px;
-  width: 200px;
-  border: 1px solid;
+  border: 1px solid #cecece;
   box-sizing: border-box;
   background: #ededed;
   text-align: center;
   font-size: 170px;
+}
+.alive {
+	background: #999;
 }
