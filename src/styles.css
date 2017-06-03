@@ -1,0 +1,15 @@
+.container {
+	width: 600px;
+	margin: auto;
+	display: flex;
+}
+.cell {
+	flex: 1;
+  height: 200px;
+  width: 200px;
+  border: 1px solid;
+  box-sizing: border-box;
+  background: #ededed;
+  text-align: center;
+  font-size: 170px;
+}
