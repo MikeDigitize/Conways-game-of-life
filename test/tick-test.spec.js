@@ -95,12 +95,15 @@ describe('Game of life', function() {
                     3: 1
                 };
                 const game = new Game(gridSize, seed);
-                const [cell] = game.grid;
-                const neighbourIndexes = getAllNeighbourIndexes(cell);
+                const [dataCell] = game.grid;
+                const [domCell] = game.cells;
+                const neighbourIndexes = getAllNeighbourIndexes(dataCell);
                 const neighbours = getAllNeighbours(game.grid, neighbourIndexes);
-                assert.equal(cell.state, 0);
-                setCellLife(cell, neighbours);
-                assert.equal(cell.state, 1);
+                assert.equal(dataCell.state, 0);
+                assert.equal(domCell.classList.contains('alive'), false);
+                setCellLife(dataCell, neighbours, domCell);
+                assert.equal(dataCell.state, 1);
+                assert.equal(domCell.classList.contains('alive'), true);
             });
 
             it('should identify if a cell is dead and has 2 live relations it is still dead', function() {
@@ -110,12 +113,15 @@ describe('Game of life', function() {
                     2: 1
                 };
                 const game = new Game(gridSize, seed);
-                const [cell] = game.grid;
-                const neighbourIndexes = getAllNeighbourIndexes(cell);
+                const [dataCell] = game.grid;
+                const [domCell] = game.cells;
+                const neighbourIndexes = getAllNeighbourIndexes(dataCell);
                 const neighbours = getAllNeighbours(game.grid, neighbourIndexes);
-                assert.equal(cell.state, 0);
-                setCellLife(cell, neighbours);
-                assert.equal(cell.state, 0);
+                assert.equal(dataCell.state, 0);
+                assert.equal(domCell.classList.contains('alive'), false);
+                setCellLife(dataCell, neighbours, domCell);
+                assert.equal(dataCell.state, 0);
+                assert.equal(domCell.classList.contains('alive'), false);
             });
 
             it('should identify if a cell is alive and has 2-3 live relations it is still alive', function() {
@@ -126,12 +132,15 @@ describe('Game of life', function() {
                     3: 1
                 };
                 const game = new Game(gridSize, seed);
-                const [cell] = game.grid;
-                const neighbourIndexes = getAllNeighbourIndexes(cell);
+                const [dataCell] = game.grid;
+                const [domCell] = game.cells;
+                const neighbourIndexes = getAllNeighbourIndexes(dataCell);
                 const neighbours = getAllNeighbours(game.grid, neighbourIndexes);
-                assert.equal(cell.state, 1);
-                setCellLife(cell, neighbours);
-                assert.equal(cell.state, 1);
+                assert.equal(dataCell.state, 1);
+                assert.equal(domCell.classList.contains('alive'), true);
+                setCellLife(dataCell, neighbours, domCell);
+                assert.equal(dataCell.state, 1);
+                assert.equal(domCell.classList.contains('alive'), true);
             });
 
             it('should identify if a cell is alive and has less than 2 live relations it is dead', function() {
@@ -141,12 +150,15 @@ describe('Game of life', function() {
                     2: 1
                 };
                 const game = new Game(gridSize, seed);
-                const [cell] = game.grid;
-                const neighbourIndexes = getAllNeighbourIndexes(cell);
+                const [dataCell] = game.grid;
+                const [domCell] = game.cells;
+                const neighbourIndexes = getAllNeighbourIndexes(dataCell);
                 const neighbours = getAllNeighbours(game.grid, neighbourIndexes);
-                assert.equal(cell.state, 1);
-                setCellLife(cell, neighbours);
-                assert.equal(cell.state, 0);
+                assert.equal(dataCell.state, 1);
+                assert.equal(domCell.classList.contains('alive'), true);
+                setCellLife(dataCell, neighbours, domCell);
+                assert.equal(dataCell.state, 0);
+                assert.equal(domCell.classList.contains('alive'), false);
             });
 
         });
@@ -222,12 +234,15 @@ describe('Game of life', function() {
                     5: 1
                 };
                 const game = new Game(gridSize, seed);
-                const cell = game.grid[2];
-                const neighbourIndexes = getAllNeighbourIndexes(cell);
+                const dataCell = game.grid[2];
+                const domCell = game.cells[2];
+                const neighbourIndexes = getAllNeighbourIndexes(dataCell);
                 const neighbours = getAllNeighbours(game.grid, neighbourIndexes);
-                assert.equal(cell.state, 0);
-                setCellLife(cell, neighbours);
-                assert.equal(cell.state, 1);
+                assert.equal(dataCell.state, 0);
+                assert.equal(domCell.classList.contains('alive'), false);
+                setCellLife(dataCell, neighbours, domCell);
+                assert.equal(dataCell.state, 1);
+                assert.equal(domCell.classList.contains('alive'), true);
             });
 
             it('should identify if a cell is dead and has 2 live relations it is still dead', function() {
@@ -237,12 +252,15 @@ describe('Game of life', function() {
                     4: 1
                 };
                 const game = new Game(gridSize, seed);
-                const cell = game.grid[2];
-                const neighbourIndexes = getAllNeighbourIndexes(cell);
+                const dataCell = game.grid[2];
+                const domCell = game.cells[2];
+                const neighbourIndexes = getAllNeighbourIndexes(dataCell);
                 const neighbours = getAllNeighbours(game.grid, neighbourIndexes);
-                assert.equal(cell.state, 0);
-                setCellLife(cell, neighbours);
-                assert.equal(cell.state, 0);
+                assert.equal(dataCell.state, 0);
+                assert.equal(domCell.classList.contains('alive'), false);
+                setCellLife(dataCell, neighbours, domCell);
+                assert.equal(dataCell.state, 0);
+                assert.equal(domCell.classList.contains('alive'), false);
             });
 
             it('should identify if a cell is alive and has 2-3 live relations it is still alive', function() {
@@ -253,12 +271,15 @@ describe('Game of life', function() {
                     4: 1
                 };
                 const game = new Game(gridSize, seed);
-                const cell = game.grid[2];
-                const neighbourIndexes = getAllNeighbourIndexes(cell);
+                const dataCell = game.grid[2];
+                const domCell = game.cells[2];
+                const neighbourIndexes = getAllNeighbourIndexes(dataCell);
                 const neighbours = getAllNeighbours(game.grid, neighbourIndexes);
-                assert.equal(cell.state, 1);
-                setCellLife(cell, neighbours);
-                assert.equal(cell.state, 1);
+                assert.equal(dataCell.state, 1);
+                assert.equal(domCell.classList.contains('alive'), true);
+                setCellLife(dataCell, neighbours, domCell);
+                assert.equal(dataCell.state, 1);
+                assert.equal(domCell.classList.contains('alive'), true);
             });
 
             it('should identify if a cell is alive and has less than 2 live relations it is dead', function() {
@@ -268,12 +289,15 @@ describe('Game of life', function() {
                     2: 1
                 };
                 const game = new Game(gridSize, seed);
-                const cell = game.grid[2];
-                const neighbourIndexes = getAllNeighbourIndexes(cell);
+                const dataCell = game.grid[2];
+                const domCell = game.cells[2];
+                const neighbourIndexes = getAllNeighbourIndexes(dataCell);
                 const neighbours = getAllNeighbours(game.grid, neighbourIndexes);
-                assert.equal(cell.state, 1);
-                setCellLife(cell, neighbours);
-                assert.equal(cell.state, 0);
+                assert.equal(dataCell.state, 1);
+                assert.equal(domCell.classList.contains('alive'), true);
+                setCellLife(dataCell, neighbours, domCell);
+                assert.equal(dataCell.state, 0);
+                assert.equal(domCell.classList.contains('alive'), false);
             });
 
             it('should identify if a cell is alive and more than 3 live relations it is dead', function() {
@@ -286,12 +310,15 @@ describe('Game of life', function() {
                     4: 1
                 };
                 const game = new Game(gridSize, seed);
-                const cell = game.grid[4];
-                const neighbourIndexes = getAllNeighbourIndexes(cell);
+                const dataCell = game.grid[4];
+                const domCell = game.cells[4];
+                const neighbourIndexes = getAllNeighbourIndexes(dataCell);
                 const neighbours = getAllNeighbours(game.grid, neighbourIndexes);
-                assert.equal(cell.state, 1);
-                setCellLife(cell, neighbours);
-                assert.equal(cell.state, 0);
+                assert.equal(dataCell.state, 1);
+                assert.equal(domCell.classList.contains('alive'), true);
+                setCellLife(dataCell, neighbours, domCell);
+                assert.equal(dataCell.state, 0);
+                assert.equal(domCell.classList.contains('alive'), false);
             });
 
             it('should identify if a cell is alive and more than 3 live relations it is dead', function() {
@@ -308,12 +335,15 @@ describe('Game of life', function() {
                     8: 1
                 };
                 const game = new Game(gridSize, seed);
-                const cell = game.grid[4];
-                const neighbourIndexes = getAllNeighbourIndexes(cell);
+                const dataCell = game.grid[4];
+                const domCell = game.cells[4];
+                const neighbourIndexes = getAllNeighbourIndexes(dataCell);
                 const neighbours = getAllNeighbours(game.grid, neighbourIndexes);
-                assert.equal(cell.state, 1);
-                setCellLife(cell, neighbours);
-                assert.equal(cell.state, 0);
+                assert.equal(dataCell.state, 1);
+                assert.equal(domCell.classList.contains('alive'), true);
+                setCellLife(dataCell, neighbours, domCell);
+                assert.equal(dataCell.state, 0);
+                assert.equal(domCell.classList.contains('alive'), false);
             });
 
         });

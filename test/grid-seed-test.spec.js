@@ -17,10 +17,10 @@ describe('Game of life', function() {
             assert.equal(game.grid.length, 9);
         });
 
-        it('should initialise a grid of 10000', () => {
-            const gridSize = 100;
+        it('should initialise a grid of 100', () => {
+            const gridSize = 10;
             const game = new Game(gridSize);
-            assert.equal(game.grid.length, 10000);
+            assert.equal(game.grid.length, 100);
         });
 
     });

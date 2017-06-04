@@ -3,7 +3,9 @@ const GRID_CONTAINER_WIDTH = 600;
 
 export default class Grid {
 	constructor(gridSize, seed = {}) {
-		this.dom = createGrid(gridSize, seed);
+		const grid = createGrid(gridSize, seed); 
+		this.dom = grid.rows;
+		this.cells = grid.cells;
 	}
 	append(parent) {
 		appendGrid(this.dom, parent);
@@ -25,16 +27,18 @@ function appendGrid(grid, parent = document.body) {
 
 function createGrid(gridSize, seed) {
 	const size = Math.pow(gridSize, 2);
-	const cells = [];
+	const tempCells = [], cells = [];
 	const rows = [];
 	for(let i = 0; i < size; i++) {
-		cells.push(createCell(gridSize, seed[i]));
+		const cell = createCell(gridSize, seed[i]);
+		tempCells.push(cell);
+		cells.push(cell);
 		if((i + 1) % gridSize === 0) {
-			rows.push(wrapRow(cells));
-			cells.length = 0;
+			rows.push(wrapRow(tempCells));
+			tempCells.length = 0;
 		}
 	}
-	return rows;
+	return { rows, cells };
 }
 
 function createCell(gridSize, state = 0) {
