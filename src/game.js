@@ -6,9 +6,9 @@ export default class Game extends Grid {
 	constructor(gridSize, seed = {}) {
 
 		super(gridSize, seed);
-		
-		const size = Math.pow(gridSize, 2);
 		this.grid = [];
+		this.autoplay = false;
+		const size = Math.pow(gridSize, 2);	
 		for(let i = 0; i < size; i++) {
 			this.grid.push(new Cell(seed[i], i, gridSize));
 		}
@@ -17,7 +17,7 @@ export default class Game extends Grid {
 
 	tick() {
 
-		const { grid, cells } = this;
+		const { grid, cells, autoplay, tick } = this;
 		const liveCells = grid.filter(isLiveCell);
 		const numOfLiveCells = liveCells.length;
 
@@ -39,13 +39,27 @@ export default class Game extends Grid {
 
 			this.grid.length = 0;
 			this.grid = this.grid.concat(nextGridState);
-
-			return true;  
+			if(!autoplay) {
+				return true; 
+			}
+			else {
+				window.requestAnimationFrame(tick.bind(this));
+			}
+			
 		}
 		else {
 			return false;
 		}		
 
+	}
+
+	play() {
+		this.autoplay = true;
+		this.tick();
+	}
+
+	stop() {
+		this.autoplay = false;
 	}
 
 }

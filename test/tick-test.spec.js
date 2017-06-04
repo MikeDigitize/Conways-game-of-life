@@ -421,7 +421,7 @@ describe('Game of life', function() {
                 assert.equal(result, true);
             });
 
-            it('should continue forever with a grid of 3 and 3 live cells', function() {
+            it('should forever with a grid of 3 and 3 live cells', function() {
                 const gridSize = 3;
                 const seed = {
                     1: 1,
