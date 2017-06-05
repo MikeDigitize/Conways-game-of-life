@@ -3,7 +3,7 @@ import Game from './game';
 const start1 = { length : 14, seed : { 33: 1, 49: 1, 60: 1, 61: 1, 64: 1, 65: 1, 66: 1 } };
 const start2 = { length : 3, seed : { 3: 1, 4: 1, 5: 1 } };
 const start3 = { length : 10, seed : { 11: 1, 12: 1, 21: 1, 22: 1, 33: 1, 34: 1, 43: 1, 44: 1 } };
-const start4 = { length : 38, seed : { 
+const start4 = { length : [38, 15], seed : { 
 	63: 1, 
 	99: 1, 101: 1, 
 	127: 1, 128: 1, 135: 1, 136: 1, 149: 1, 150: 1,

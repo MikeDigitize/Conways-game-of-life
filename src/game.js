@@ -8,9 +8,21 @@ export default class Game extends Grid {
 		super(gridSize, seed);
 		this.grid = [];
 		this.autoplay = false;
-		const size = Math.pow(gridSize, 2);	
+
+		let size, x, y;
+
+		if(gridSize instanceof Array) {
+			x = gridSize[0];
+			y = gridSize[1];
+			size = x * y;
+		}
+		else {
+			size = Math.pow(gridSize, 2);
+			x = gridSize;
+		}
+
 		for(let i = 0; i < size; i++) {
-			this.grid.push(new Cell(seed[i], i, gridSize));
+			this.grid.push(new Cell(seed[i], i, x));
 		}
 
 	}
@@ -39,6 +51,7 @@ export default class Game extends Grid {
 
 			this.grid.length = 0;
 			this.grid = this.grid.concat(nextGridState);
+			
 			if(!autoplay) {
 				return true; 
 			}
@@ -117,7 +130,13 @@ export function setDomCellState(isLiveCell, domCell) {
 }
 
 function isLiveCell(cell) {
-	return cell.state === 1;
+	try {
+		return cell.state === 1;
+	}
+	catch(e) {
+		console.log(cell, e);
+	}
+	
 }
 
 function isDeadCell(cell) {

@@ -26,17 +26,33 @@ function appendGrid(grid, parent = document.body) {
 }
 
 function createGrid(gridSize, seed) {
-	const size = Math.pow(gridSize, 2);
-	const tempCells = [], cells = [];
-	const rows = [];
+	
+	const tempCells = [], cells = [], rows = [];
+	let size, x, y;
+
+	if(gridSize instanceof Array) {
+		x = gridSize[0];
+		y = gridSize[1];
+		size = x * y;
+	}
+	else {
+		size = Math.pow(gridSize, 2);
+		x = gridSize;
+	}
+
+	console.log(x, y, size);
+	
 	for(let i = 0; i < size; i++) {
-		const cell = createCell(gridSize, seed[i]);
+
+		const cell = createCell(x, seed[i]);
 		tempCells.push(cell);
 		cells.push(cell);
-		if((i + 1) % gridSize === 0) {
+
+		if((i + 1) % x === 0) {
 			rows.push(wrapRow(tempCells));
 			tempCells.length = 0;
 		}
+
 	}
 	return { rows, cells };
 }
