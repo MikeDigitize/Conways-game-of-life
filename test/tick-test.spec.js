@@ -1,3 +1,4 @@
+import globalJsdom from 'jsdom-global';
 import assert from 'assert';
 import Game, { 
     getAllNeighbourIndexes, 
@@ -9,6 +10,8 @@ import Game, {
 import Cell from '../src/cell';
 
 describe('Game of life', function() {
+
+    globalJsdom();
 
     describe('Tick', function() {
 

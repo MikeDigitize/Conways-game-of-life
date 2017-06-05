@@ -6,6 +6,7 @@ export default class Game extends Grid {
 	constructor(gridSize, seed = {}) {
 
 		super(gridSize, seed);
+		
 		this.grid = [];
 		this.autoplay = false;
 
@@ -46,7 +47,12 @@ export default class Game extends Grid {
 
 			nextGridState.forEach(function(dataCell, index) {
 				const isAlive = dataCell.state === 1 ? true : false;
-				setDomCellState(isAlive, cells[index]);
+				if(typeof window.requestAnimationFrame === 'function') {
+					window.requestAnimationFrame(setDomCellState.bind(this, isAlive, cells[index]));
+				}
+				else {
+					setDomCellState(isAlive, cells[index]);
+				}
 			});
 
 			this.grid.length = 0;
@@ -135,8 +141,7 @@ function isLiveCell(cell) {
 	}
 	catch(e) {
 		console.log(cell, e);
-	}
-	
+	}	
 }
 
 function isDeadCell(cell) {

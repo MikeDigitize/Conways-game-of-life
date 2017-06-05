@@ -39,8 +39,6 @@ function createGrid(gridSize, seed) {
 		size = Math.pow(gridSize, 2);
 		x = gridSize;
 	}
-
-	console.log(x, y, size);
 	
 	for(let i = 0; i < size; i++) {
 
