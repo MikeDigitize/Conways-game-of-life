@@ -39,31 +39,32 @@ export default class Game extends Grid {
 
 		if(numOfLiveCells > 0 && grid.length !== numOfLiveCells) {
 			
-			nextGridState = nextGridState.map(function(dataCell) {
+			nextGridState = nextGridState.map(function(dataCell, index) {
 				const neighbourIndexes = getAllNeighbourIndexes(dataCell);
       	const neighbours = getAllNeighbours(grid, neighbourIndexes);
-      	return setCellLife(dataCell, neighbours);
+      	console.log(grid, neighbourIndexes, neighbours)
+      	return setCellLife(dataCell, neighbours, index);
 			}); 
 
-			nextGridState.forEach(function(dataCell, index) {
-				const isAlive = dataCell.state === 1 ? true : false;
-				if(typeof window.requestAnimationFrame === 'function') {
-					window.requestAnimationFrame(setDomCellState.bind(this, isAlive, cells[index]));
-				}
-				else {
-					setDomCellState(isAlive, cells[index]);
-				}
-			});
+			// nextGridState.forEach(function(dataCell, index) {
+			// 	const isAlive = dataCell.state === 1 ? true : false;
+			// 	if(typeof window.requestAnimationFrame === 'function') {
+			// 		window.requestAnimationFrame(setDomCellState.bind(this, isAlive, cells[index]));
+			// 	}
+			// 	else {
+			// 		setDomCellState(isAlive, cells[index]);
+			// 	}
+			// });
 
-			this.grid.length = 0;
-			this.grid = this.grid.concat(nextGridState);
+			// this.grid.length = 0;
+			// this.grid = this.grid.concat(nextGridState);
 			
-			if(!autoplay) {
-				return true; 
-			}
-			else {
-				window.requestAnimationFrame(tick.bind(this));
-			}
+			// if(!autoplay) {
+			// 	return true; 
+			// }
+			// else {
+			// 	window.requestAnimationFrame(tick.bind(this));
+			// }
 			
 		}
 		else {
@@ -110,7 +111,7 @@ export function getAllLiveNeighbours(neighbours) {
 	return neighbours.filter(isLiveCell);
 }
 
-export function setCellLife(dataCell, neighbours) {
+export function setCellLife(dataCell, neighbours, index) {
 	const liveNeighbours = getAllLiveNeighbours(neighbours);
 	const nextCell = Object.assign({}, dataCell);
 	if(dataCell.state === 0) {
@@ -136,12 +137,7 @@ export function setDomCellState(isLiveCell, domCell) {
 }
 
 function isLiveCell(cell) {
-	try {
-		return cell.state === 1;
-	}
-	catch(e) {
-		console.log(cell, e);
-	}	
+	return cell.state === 1;
 }
 
 function isDeadCell(cell) {

@@ -7,7 +7,7 @@ describe('Game of life', function() {
 
         it('should initialise a grid of 1', () => {
             const gridSize = 1;
-            const game = new Game(1);
+            const game = new Game(gridSize);
             assert.equal(game.grid.length, 1);
         });
 
@@ -21,6 +21,24 @@ describe('Game of life', function() {
             const gridSize = 10;
             const game = new Game(gridSize);
             assert.equal(game.grid.length, 100);
+        });
+
+        it('should initialise a grid of 1 x 3', () => {
+            const gridSize = [1,3];
+            const game = new Game(gridSize);
+            assert.equal(game.grid.length, 3);
+        });
+
+        it('should initialise a grid of 2 x 3', () => {
+            const gridSize = [2,3];
+            const game = new Game(gridSize);
+            assert.equal(game.grid.length, 6);
+        });
+
+        it('should initialise a grid of 100 x 3', () => {
+            const gridSize = [100,3];
+            const game = new Game(gridSize);
+            assert.equal(game.grid.length, 300);
         });
 
     });
@@ -52,6 +70,20 @@ describe('Game of life', function() {
             assert.equal(game.grid[0].state, 0);
             assert.equal(game.grid[56].state, 1);
             assert.equal(game.grid[99].state, 1);
+        });
+
+        it('should initialise with specified live cells in a grid size of 3 x 10', function() {
+            const gridSize = [3, 10];
+            const seed = {
+                29: 1
+            };
+            const game = new Game(gridSize, seed);
+            assert.equal(game.grid.length, 30);
+            assert.equal(game.grid[0].state, 0);
+            assert.equal(game.grid[9].state, 0);
+            assert.equal(game.grid[19].state, 0);
+            assert.equal(game.grid[29].state, 1);
+            
         });
 
     });
