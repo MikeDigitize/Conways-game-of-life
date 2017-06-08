@@ -10,20 +10,18 @@ export default class Game extends Grid {
 		this.grid = [];
 		this.autoplay = false;
 
-		let size, x, y;
+		let size;
 
 		if(gridSize instanceof Array) {
-			x = gridSize[0];
-			y = gridSize[1];
+			let [x, y] = gridSize;
 			size = x * y;
 		}
 		else {
 			size = Math.pow(gridSize, 2);
-			x = gridSize;
 		}
 
 		for(let i = 0; i < size; i++) {
-			this.grid.push(new Cell(seed[i], i, x));
+			this.grid.push(new Cell(i, gridSize, seed[i]));
 		}
 
 	}
@@ -42,29 +40,28 @@ export default class Game extends Grid {
 			nextGridState = nextGridState.map(function(dataCell, index) {
 				const neighbourIndexes = getAllNeighbourIndexes(dataCell);
       	const neighbours = getAllNeighbours(grid, neighbourIndexes);
-      	console.log(grid, neighbourIndexes, neighbours)
-      	return setCellLife(dataCell, neighbours, index);
+      	return setCellLife(dataCell, neighbours);
 			}); 
 
-			// nextGridState.forEach(function(dataCell, index) {
-			// 	const isAlive = dataCell.state === 1 ? true : false;
-			// 	if(typeof window.requestAnimationFrame === 'function') {
-			// 		window.requestAnimationFrame(setDomCellState.bind(this, isAlive, cells[index]));
-			// 	}
-			// 	else {
-			// 		setDomCellState(isAlive, cells[index]);
-			// 	}
-			// });
+			nextGridState.forEach(function(dataCell, index) {
+				const isAlive = dataCell.state === 1 ? true : false;
+				if(typeof window.requestAnimationFrame === 'function') {
+					window.requestAnimationFrame(setDomCellState.bind(this, isAlive, cells[index]));
+				}
+				else {
+					setDomCellState(isAlive, cells[index]);
+				}
+			});
 
-			// this.grid.length = 0;
-			// this.grid = this.grid.concat(nextGridState);
+			this.grid.length = 0;
+			this.grid = this.grid.concat(nextGridState);
 			
-			// if(!autoplay) {
-			// 	return true; 
-			// }
-			// else {
-			// 	window.requestAnimationFrame(tick.bind(this));
-			// }
+			if(!autoplay) {
+				return true; 
+			}
+			else {
+				window.requestAnimationFrame(tick.bind(this));
+			}
 			
 		}
 		else {
@@ -111,7 +108,7 @@ export function getAllLiveNeighbours(neighbours) {
 	return neighbours.filter(isLiveCell);
 }
 
-export function setCellLife(dataCell, neighbours, index) {
+export function setCellLife(dataCell, neighbours) {
 	const liveNeighbours = getAllLiveNeighbours(neighbours);
 	const nextCell = Object.assign({}, dataCell);
 	if(dataCell.state === 0) {

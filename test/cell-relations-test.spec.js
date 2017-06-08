@@ -10,7 +10,7 @@ describe('Game of life', function() {
             it('Should know the left and right cells are not active if index = 0', function() {
                 const index = 0;
                 const gridSize = 1;
-                const cell = new Cell(1, index, gridSize);
+                const cell = new Cell(index, gridSize, 1);
                 assert.equal(cell.neighbours.left, null);
                 assert.equal(cell.neighbours.topLeft, null);
                 assert.equal(cell.neighbours.bottomLeft, null);
@@ -26,7 +26,7 @@ describe('Game of life', function() {
             it('Should know the left and right cell\'s state if index = 0', function() {
                 const index = 0;
                 const gridSize = 2;
-                const cell = new Cell(1, index, gridSize);
+                const cell = new Cell(index, gridSize, 1);
                 assert.equal(cell.neighbours.left, null);
                 assert.equal(cell.neighbours.topLeft, null);
                 assert.equal(cell.neighbours.bottomLeft, null);
@@ -38,7 +38,7 @@ describe('Game of life', function() {
             it('Should know the left and right cell\'s state if index = 3', function() {
                 const index = 3;
                 const gridSize = 2;
-                const cell = new Cell(1, index, gridSize);
+                const cell = new Cell(index, gridSize, 1);
                 assert.equal(cell.neighbours.left, 2);
                 assert.equal(cell.neighbours.topLeft, 0);
                 assert.equal(cell.neighbours.bottomLeft, null);
@@ -54,7 +54,7 @@ describe('Game of life', function() {
             it('Should know the left and right cell\'s state if index = 0', function() {
                 const index = 0;
                 const gridSize = 3;
-                const cell = new Cell(1, index, gridSize);
+                const cell = new Cell(index, gridSize, 1);
                 assert.equal(cell.neighbours.left, null);
                 assert.equal(cell.neighbours.topLeft, null);
                 assert.equal(cell.neighbours.bottomLeft, null);
@@ -66,7 +66,7 @@ describe('Game of life', function() {
             it('Should know the left and right cell\'s state if index = 1', function() {
                 const index = 1;
                 const gridSize = 3;
-                const cell = new Cell(1, index, gridSize);
+                const cell = new Cell(index, gridSize, 1);
                 assert.equal(cell.neighbours.left, 0);
                 assert.equal(cell.neighbours.topLeft, null);
                 assert.equal(cell.neighbours.bottomLeft, 3);
@@ -78,7 +78,7 @@ describe('Game of life', function() {
             it('Should know the left and right cell\'s state if index = 4', function() {
                 const index = 4;
                 const gridSize = 3;
-                const cell = new Cell(1, index, gridSize);
+                const cell = new Cell(index, gridSize, 1);
                 assert.equal(cell.neighbours.left, 3);
                 assert.equal(cell.neighbours.topLeft, 0);
                 assert.equal(cell.neighbours.bottomLeft, 6);
@@ -90,7 +90,7 @@ describe('Game of life', function() {
             it('Should know the left and right cell\'s state if index = 6', function() {
                 const index = 6;
                 const gridSize = 3;
-                const cell = new Cell(1, index, gridSize);
+                const cell = new Cell(index, gridSize, 1);
                 assert.equal(cell.neighbours.left, null);
                 assert.equal(cell.neighbours.topLeft, null);
                 assert.equal(cell.neighbours.bottomLeft, null);
@@ -102,7 +102,7 @@ describe('Game of life', function() {
             it('Should know the left and right cell\'s state if index = 8', function() {
                 const index = 8;
                 const gridSize = 3;
-                const cell = new Cell(1, index, gridSize);
+                const cell = new Cell(index, gridSize, 1);
                 assert.equal(cell.neighbours.left, 7);
                 assert.equal(cell.neighbours.topLeft, 4);
                 assert.equal(cell.neighbours.bottomLeft, null);
@@ -115,7 +115,7 @@ describe('Game of life', function() {
             it('Should know the top and bottom cells are not active if index = 0', function() {
                 const index = 0;
                 const gridSize = 1;
-                const cell = new Cell(1, index, gridSize);
+                const cell = new Cell(index, gridSize, 1);
                 assert.equal(cell.neighbours.top, null);
                 assert.equal(cell.neighbours.bottom, null);
             });
@@ -127,7 +127,7 @@ describe('Game of life', function() {
             it('Should know the top cell is not active and the bottom is if index = 0', function() {
                 const index = 0;
                 const gridSize = 2;
-                const cell = new Cell(1, index, gridSize);
+                const cell = new Cell(index, gridSize, 1);
                 assert.equal(cell.neighbours.top, null);
                 assert.equal(cell.neighbours.bottom, 2);
             });
@@ -135,7 +135,7 @@ describe('Game of life', function() {
             it('Should know the top cell is active and the bottom isn\'t if index = 3', function() {
                 const index = 3;
                 const gridSize = 2;
-                const cell = new Cell(1, index, gridSize);
+                const cell = new Cell(index, gridSize, 1);
                 assert.equal(cell.neighbours.top, 1);
                 assert.equal(cell.neighbours.bottom, null);
             });
@@ -147,7 +147,7 @@ describe('Game of life', function() {
             it('Should know the top cell is not active and bottom is if index = 0', function() {
                 const index = 0;
                 const gridSize = 3;
-                const cell = new Cell(1, index, gridSize);
+                const cell = new Cell(index, gridSize, 1);
                 assert.equal(cell.neighbours.top, null);
                 assert.equal(cell.neighbours.bottom, 3);
             });
@@ -155,7 +155,7 @@ describe('Game of life', function() {
             it('Should know the top and bottom cell\'s state if index = 1', function() {
                 const index = 3;
                 const gridSize = 3;
-                const cell = new Cell(1, index, gridSize);
+                const cell = new Cell(index, gridSize, 1);
                 assert.equal(cell.neighbours.top, 0);
                 assert.equal(cell.neighbours.bottom, 6);
             });
@@ -163,7 +163,7 @@ describe('Game of life', function() {
             it('Should know the top and bottom cell\'s state if index = 4', function() {
                 const index = 5;
                 const gridSize = 3;
-                const cell = new Cell(1, index, gridSize);
+                const cell = new Cell(index, gridSize, 1);
                 assert.equal(cell.neighbours.top, 2);
                 assert.equal(cell.neighbours.bottom, 8);
             });
@@ -171,7 +171,7 @@ describe('Game of life', function() {
             it('Should know the top and bottom cell\'s state if index = 6', function() {
                 const index = 6;
                 const gridSize = 3;
-                const cell = new Cell(1, index, gridSize);
+                const cell = new Cell(index, gridSize, 1);
                 assert.equal(cell.neighbours.top, 3);
                 assert.equal(cell.neighbours.bottom, null);
             });
@@ -179,7 +179,7 @@ describe('Game of life', function() {
             it('Should know the top and bottom cell\'s state if index = 8', function() {
                 const index = 8;
                 const gridSize = 3;
-                const cell = new Cell(1, index, gridSize);
+                const cell = new Cell(index, gridSize, 1);
                 assert.equal(cell.neighbours.top, 5);
                 assert.equal(cell.neighbours.bottom, null);
             });

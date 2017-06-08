@@ -20,7 +20,7 @@ describe('Game of life', function() {
             it('should return no relations of a cell in a 1x1 grid', function() {
                 const index = 0;
                 const gridSize = 1;
-                const cell = new Cell(1, index, gridSize);
+                const cell = new Cell(index, gridSize, 1);
                 const neighbourIndexes = getAllNeighbourIndexes(cell);
                 assert.equal(neighbourIndexes.length, 0);
                 assert.deepEqual(neighbourIndexes, []);
@@ -33,7 +33,7 @@ describe('Game of life', function() {
             it('should return all relations of a cell', function() {
                 const index = 0;
                 const gridSize = 2;
-                const cell = new Cell(1, index, gridSize);
+                const cell = new Cell(index, gridSize, 1);
                 const neighbourIndexes = getAllNeighbourIndexes(cell);
                 assert.equal(neighbourIndexes.length, 3);
                 assert.deepEqual(neighbourIndexes, [1,2,3]);
@@ -102,6 +102,7 @@ describe('Game of life', function() {
                 const [dataCell] = game.grid;
                 const [domCell] = game.cells;
                 const neighbourIndexes = getAllNeighbourIndexes(dataCell);
+                assert.equal(neighbourIndexes.length, 3);
                 const neighbours = getAllNeighbours(game.grid, neighbourIndexes);
                 assert.equal(dataCell.state, 0);
                 assert.equal(domCell.classList.contains('alive'), false);
@@ -176,10 +177,137 @@ describe('Game of life', function() {
             it('should return all relations of a cell', function() {
                 const index = 4;
                 const gridSize = 3;
-                const cell = new Cell(1, index, gridSize);
+                const cell = new Cell(index, gridSize, 1);
                 const neighbourIndexes = getAllNeighbourIndexes(cell);
                 assert.equal(neighbourIndexes.length, 8);
                 assert.deepEqual(neighbourIndexes, [0,1,2,3,5,6,7,8]);
+            });
+
+            it('should return all relations of a cell', function() {
+                const index = 8;
+                const gridSize = 3;
+                const cell = new Cell(index, gridSize, 1);
+                const neighbourIndexes = getAllNeighbourIndexes(cell);
+                assert.equal(neighbourIndexes.length, 3);
+                assert.deepEqual(neighbourIndexes, [4,5,7]);
+            });
+
+            it('should return all relations of a cell', function() {
+                const index = 7;
+                const gridSize = 3;
+                const cell = new Cell(index, gridSize, 1);
+                const neighbourIndexes = getAllNeighbourIndexes(cell);
+                assert.equal(neighbourIndexes.length, 5);
+                assert.deepEqual(neighbourIndexes, [3,4,5,6,8]);
+            });
+
+            it('should return all relations of a cell', function() {
+                const index = 6;
+                const gridSize = 3;
+                const cell = new Cell(index, gridSize, 1);
+                const neighbourIndexes = getAllNeighbourIndexes(cell);
+                assert.equal(neighbourIndexes.length, 3);
+                assert.deepEqual(neighbourIndexes, [3,4,7]);
+            });
+
+            it('should return all neighbours of a cell', function() {
+                const index = 6;
+                const gridSize = 3;
+                const game = new Game(gridSize);
+                const cell = game.grid[index];
+                const neighbourIndexes = getAllNeighbourIndexes(cell);
+                const neighbours = getAllNeighbours(game.grid, neighbourIndexes);
+                neighbours.forEach(neighbour => assert.equal(neighbour instanceof Cell, true));
+                assert.equal(neighbours.length, 3);
+                assert.deepEqual(neighbours, [game.grid[3], game.grid[4], game.grid[7]]);
+            });
+
+            it('should return all neighbours of a cell', function() {
+                const index = 7;
+                const gridSize = 3;
+                const game = new Game(gridSize);
+                const cell = game.grid[index];
+                const neighbourIndexes = getAllNeighbourIndexes(cell);
+                const neighbours = getAllNeighbours(game.grid, neighbourIndexes);
+                neighbours.forEach(neighbour => assert.equal(neighbour instanceof Cell, true));
+                assert.equal(neighbours.length, 5);
+                assert.deepEqual(neighbours, [game.grid[3], game.grid[4], game.grid[5], game.grid[6], game.grid[8]]);
+            });
+
+            it('should return all neighbours of a cell', function() {
+                const index = 8;
+                const gridSize = 3;
+                const game = new Game(gridSize);
+                const cell = game.grid[index];
+                const neighbourIndexes = getAllNeighbourIndexes(cell);
+                const neighbours = getAllNeighbours(game.grid, neighbourIndexes);
+                neighbours.forEach(neighbour => assert.equal(neighbour instanceof Cell, true));
+                assert.equal(neighbours.length, 3);
+                assert.deepEqual(neighbours, [game.grid[4], game.grid[5], game.grid[7]]);
+            });
+
+            it('should return all live neighbours of a cell', function() {
+                const index = 6;
+                const gridSize = 3;
+                const seed = {
+                    3: 1,
+                    4: 1
+                };
+                const game = new Game(gridSize, seed);
+                const cell = game.grid[index];
+                const neighbourIndexes = getAllNeighbourIndexes(cell);
+                const neighbours = getAllNeighbours(game.grid, neighbourIndexes);
+                const liveNeighbours = getAllLiveNeighbours(neighbours);
+                liveNeighbours.forEach(neighbour => assert.equal(neighbour instanceof Cell, true));
+                assert.equal(liveNeighbours.length, 2);
+                assert.deepEqual(liveNeighbours, [game.grid[3], game.grid[4]]);
+            });
+
+            it('should return all live neighbours of a cell', function() {
+                const index = 4;
+                const gridSize = 3;
+                const seed = {
+                    2: 1,
+                    3: 1,
+                    5: 1,
+                    8: 1
+                };
+                const game = new Game(gridSize, seed);
+                const cell = game.grid[index];
+                const neighbourIndexes = getAllNeighbourIndexes(cell);
+                const neighbours = getAllNeighbours(game.grid, neighbourIndexes);
+                const liveNeighbours = getAllLiveNeighbours(neighbours);
+                liveNeighbours.forEach(neighbour => assert.equal(neighbour instanceof Cell, true));
+                assert.equal(liveNeighbours.length, 4);
+                assert.deepEqual(liveNeighbours, [game.grid[2], game.grid[3], game.grid[5], game.grid[8]]);
+            });
+
+            it('should return all live neighbours of a cell', function() {
+                const index = 8;
+                const gridSize = [3, 4];
+                const game = new Game(gridSize);
+                const cell = game.grid[index];
+                const neighbourIndexes = getAllNeighbourIndexes(cell);
+                const neighbours = getAllNeighbours(game.grid, neighbourIndexes);
+                neighbours.forEach(neighbour => assert.equal(neighbour instanceof Cell, true));
+                assert.equal(neighbours.length, 5);
+                assert.deepEqual(neighbours, [game.grid[4], game.grid[5], game.grid[7], game.grid[10], game.grid[11]]);
+            });
+
+            it('should return all live neighbours of a cell', function() {
+                const index = 8;
+                const gridSize = 3;
+                const seed = {
+                    7: 1
+                };
+                const game = new Game(gridSize, seed);
+                const cell = game.grid[index];
+                const neighbourIndexes = getAllNeighbourIndexes(cell);
+                const neighbours = getAllNeighbours(game.grid, neighbourIndexes);
+                const liveNeighbours = getAllLiveNeighbours(neighbours);
+                liveNeighbours.forEach(neighbour => assert.equal(neighbour instanceof Cell, true));
+                assert.equal(liveNeighbours.length, 1);
+                assert.deepEqual(liveNeighbours, [game.grid[7]]);
             });
 
             it('should identify no live relations to a cell', function() {
