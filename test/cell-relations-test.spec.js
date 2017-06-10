@@ -186,6 +186,38 @@ describe('Game of life', function() {
 
         });
 
+        describe('Cells should be aware of their left and right relations in a grid size of 3 x 4', function() {
+            
+            it('Should know the right, top right and bottom right cells are not active if index = 8', function() {
+                const index = 8;
+                const gridSize = [3,4];
+                const cell = new Cell(index, gridSize, 1);
+                assert.equal(cell.neighbours.left, 7);
+                assert.equal(cell.neighbours.topLeft, 4);
+                assert.equal(cell.neighbours.top, 5);
+                assert.equal(cell.neighbours.bottomLeft, 10);
+                assert.equal(cell.neighbours.bottom, 11);
+                assert.equal(cell.neighbours.right, null);
+                assert.equal(cell.neighbours.topRight, null);
+                assert.equal(cell.neighbours.bottomRight, null);
+            });
+
+            it('Should know the right, top right and bottom right cells are not active if index = 8', function() {
+                const index = 11;
+                const gridSize = [3,4];
+                const cell = new Cell(index, gridSize, 1);
+                assert.equal(cell.neighbours.left, 10);
+                assert.equal(cell.neighbours.topLeft, 7);
+                assert.equal(cell.neighbours.top, 8);
+                assert.equal(cell.neighbours.bottomLeft, null);
+                assert.equal(cell.neighbours.bottom, null);
+                assert.equal(cell.neighbours.right, null);
+                assert.equal(cell.neighbours.topRight, null);
+                assert.equal(cell.neighbours.bottomRight, null);
+            });
+
+        });
+
     });
 
 });

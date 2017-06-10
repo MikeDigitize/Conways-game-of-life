@@ -197,6 +197,79 @@ describe('Game of life', function() {
 
         });
 
+        describe('Grid size of 3 x 5', function() {
+
+            it('should create fifteen dead cells in a 3x5 grid', function() {
+              const gridSize = [3, 5];
+              const grid = new Grid(gridSize);
+              const [row1, row2, row3, row4, row5] = grid.dom;
+              const { cells } = grid;  
+              const [cell1, cell2, cell3] = row1.children;
+              const [cell4, cell5, cell6] = row2.children;
+              const [cell7, cell8, cell9] = row3.children;
+              const [cell10, cell11, cell12] = row4.children;
+              const [cell13, cell14, cell15] = row5.children;
+              assert.equal(grid.dom.length, 5);
+              assert.equal(row1.children.length, 3);
+              assert.equal(row2.children.length, 3);
+              assert.equal(row3.children.length, 3);
+              assert.equal(row4.children.length, 3);
+              assert.equal(row5.children.length, 3);
+              assert.equal(cell1.classList.contains('alive'), false);
+              assert.equal(cell2.classList.contains('alive'), false);
+              assert.equal(cell3.classList.contains('alive'), false);
+              assert.equal(cell4.classList.contains('alive'), false);
+              assert.equal(cell5.classList.contains('alive'), false);
+              assert.equal(cell6.classList.contains('alive'), false);
+              assert.equal(cell7.classList.contains('alive'), false);
+              assert.equal(cell8.classList.contains('alive'), false);
+              assert.equal(cell9.classList.contains('alive'), false);
+              assert.equal(cell10.classList.contains('alive'), false);
+              assert.equal(cell11.classList.contains('alive'), false);
+              assert.equal(cell12.classList.contains('alive'), false);
+              assert.equal(cell13.classList.contains('alive'), false);
+              assert.equal(cell14.classList.contains('alive'), false);
+              assert.equal(cell15.classList.contains('alive'), false);
+              assert.equal(cells.length, 15);
+            });
+
+            it('should create fifteen live cells in a 3x5 grid', function() {
+              const seed = { 0: 1, 1: 1, 2: 1, 3: 1, 4: 1, 5: 1, 6: 1, 7: 1, 8: 1, 9: 1, 10: 1, 11: 1, 12: 1, 13: 1, 14: 1, 15: 1 };
+              const gridSize = [3, 5];
+              const grid = new Grid(gridSize, seed);
+              const [row1, row2, row3, row4, row5] = grid.dom;
+              const { cells } = grid;  
+              const [cell1, cell2, cell3] = row1.children;
+              const [cell4, cell5, cell6] = row2.children;
+              const [cell7, cell8, cell9] = row3.children;
+              const [cell10, cell11, cell12] = row4.children;
+              const [cell13, cell14, cell15] = row5.children;
+              assert.equal(grid.dom.length, 5);
+              assert.equal(row1.children.length, 3);
+              assert.equal(row2.children.length, 3);
+              assert.equal(row3.children.length, 3);
+              assert.equal(row4.children.length, 3);
+              assert.equal(row5.children.length, 3);
+              assert.equal(cell1.classList.contains('alive'), true);
+              assert.equal(cell2.classList.contains('alive'), true);
+              assert.equal(cell3.classList.contains('alive'), true);
+              assert.equal(cell4.classList.contains('alive'), true);
+              assert.equal(cell5.classList.contains('alive'), true);
+              assert.equal(cell6.classList.contains('alive'), true);
+              assert.equal(cell7.classList.contains('alive'), true);
+              assert.equal(cell8.classList.contains('alive'), true);
+              assert.equal(cell9.classList.contains('alive'), true);
+              assert.equal(cell10.classList.contains('alive'), true);
+              assert.equal(cell11.classList.contains('alive'), true);
+              assert.equal(cell12.classList.contains('alive'), true);
+              assert.equal(cell13.classList.contains('alive'), true);
+              assert.equal(cell14.classList.contains('alive'), true);
+              assert.equal(cell15.classList.contains('alive'), true);
+              assert.equal(cells.length, 15);
+            });
+
+        });
+
     });
 
 });
