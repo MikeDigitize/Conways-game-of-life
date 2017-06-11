@@ -41,16 +41,20 @@ let seed = {
   8: 1
 };  // sets cells with index of 3, 5 and 8 as alive
 ```
-To play a move of the game call the `tick` method on your game instance.
+Call the `append` method on your game instance to append the grid to the page. The `append` method takes a HTML element as a target to append to but defaults to the `document.body` if no arguments are received.
 
 ```javascript
 const game = new Game(gridSize, seed);
+game.append();
+```
+To play a move of the game call the `tick` method on your game instance.
+
+```javascript
 game.tick();
 ```
 To have the game autoplay call the `play` method to start and `stop` method to stop autoplaying.
 
 ```javascript
-const game = new Game(gridSize, seed);
 game.play();
 
 // some time later
