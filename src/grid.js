@@ -14,15 +14,19 @@ export default class Grid {
 }
 
 function appendGrid(grid, parent = document.body) {
+
 	const container = document.createElement('div');
 	container.classList.add(GRID_CONTAINER_SELECTOR);
 	container.style.setProperty('width', `${GRID_CONTAINER_WIDTH}px`);
 	const frag = document.createDocumentFragment();
+
 	grid.forEach(function(row) {
 		container.appendChild(row);
 	});
+
 	frag.appendChild(container);
 	parent.appendChild(frag);
+	
 }
 
 function createGrid(gridSize, seed) {
@@ -56,15 +60,19 @@ function createGrid(gridSize, seed) {
 }
 
 function createCell(gridSize, state = 0) {
+
 	const cell = document.createElement('span');
 	const width = (GRID_CONTAINER_WIDTH / gridSize).toFixed(2);
+
 	cell.classList.add('cell');
 	cell.style.setProperty('width', `${width}px`);
 	cell.style.setProperty('height', `${width}px`);
+
 	if(state === 1) {
 		cell.classList.add('alive');
 	}
 	return cell;
+
 }
 
 function createRow(){

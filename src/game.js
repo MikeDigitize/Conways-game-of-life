@@ -28,31 +28,38 @@ export default class Game extends Grid {
 
 	tick() {
 
+		// jsdom doesn't support raf - quick polyfill for testing
+		let { requestAnimationFrame } = window;
+		if(typeof requestAnimationFrame !== 'function') {
+		    requestAnimationFrame = function(callback) {
+		        setTimeout(callback, 1);
+		    }
+		}
+
 		const { grid, cells, autoplay, tick } = this;
 		const liveCells = grid.filter(isLiveCell);
 		const numOfLiveCells = liveCells.length;
 
-		let nextGridState = [];
-		nextGridState = nextGridState.concat(grid);
+		// copy current state
+		let nextGridState = [].concat(grid);
 
+		// TODO: add test condition to see if new grid state is same as previous grid state and if so exit
 		if(numOfLiveCells > 0 && grid.length !== numOfLiveCells) {
 			
+			// calculate new grid state
 			nextGridState = nextGridState.map(function(dataCell, index) {
 				const neighbourIndexes = getAllNeighbourIndexes(dataCell);
       	const neighbours = getAllNeighbours(grid, neighbourIndexes);
-      	return setCellLife(dataCell, neighbours);
+      	return setCellState(dataCell, neighbours);
 			}); 
 
+			// update dom with new state
 			nextGridState.forEach(function(dataCell, index) {
 				const isAlive = dataCell.state === 1 ? true : false;
-				if(typeof window.requestAnimationFrame === 'function') {
-					window.requestAnimationFrame(setDomCellState.bind(this, isAlive, cells[index]));
-				}
-				else {
-					setDomCellState(isAlive, cells[index]);
-				}
+				requestAnimationFrame(setDomCellState.bind(this, isAlive, cells[index]));
 			});
 
+			// remove last grid state and replace with new state
 			this.grid.length = 0;
 			this.grid = this.grid.concat(nextGridState);
 			
@@ -60,7 +67,7 @@ export default class Game extends Grid {
 				return true; 
 			}
 			else {
-				window.requestAnimationFrame(tick.bind(this));
+				requestAnimationFrame(tick.bind(this));
 			}
 			
 		}
@@ -108,7 +115,7 @@ export function getAllLiveNeighbours(neighbours) {
 	return neighbours.filter(isLiveCell);
 }
 
-export function setCellLife(dataCell, neighbours) {
+export function setCellState(dataCell, neighbours) {
 	const liveNeighbours = getAllLiveNeighbours(neighbours);
 	const nextCell = Object.assign({}, dataCell);
 	if(dataCell.state === 0) {

@@ -4,7 +4,7 @@ import Game, {
     getAllNeighbourIndexes, 
     getAllNeighbours, 
     getAllLiveNeighbours,
-    setCellLife,
+    setCellState,
     setDomCellState 
 } from '../src/game';
 import Cell from '../src/cell';
@@ -128,7 +128,7 @@ describe('Game of life', function() {
                 const neighbours = getAllNeighbours(game.grid, neighbourIndexes);
                 assert.equal(dataCell.state, 0);
                 assert.equal(domCell.classList.contains('alive'), false);
-                const nextDataCell = setCellLife(dataCell, neighbours);
+                const nextDataCell = setCellState(dataCell, neighbours);
                 setDomCellState(nextDataCell.state === 1, domCell);
                 assert.equal(nextDataCell.state, 1);
                 assert.equal(domCell.classList.contains('alive'), true);
@@ -147,7 +147,7 @@ describe('Game of life', function() {
                 const neighbours = getAllNeighbours(game.grid, neighbourIndexes);
                 assert.equal(dataCell.state, 0);
                 assert.equal(domCell.classList.contains('alive'), false);
-                const nextDataCell = setCellLife(dataCell, neighbours);
+                const nextDataCell = setCellState(dataCell, neighbours);
                 setDomCellState(nextDataCell.state === 1, domCell);
                 assert.equal(nextDataCell.state, 0);
                 assert.equal(domCell.classList.contains('alive'), false);
@@ -167,7 +167,7 @@ describe('Game of life', function() {
                 const neighbours = getAllNeighbours(game.grid, neighbourIndexes);
                 assert.equal(dataCell.state, 1);
                 assert.equal(domCell.classList.contains('alive'), true);
-                const nextDataCell = setCellLife(dataCell, neighbours);
+                const nextDataCell = setCellState(dataCell, neighbours);
                 setDomCellState(nextDataCell.state === 1, domCell);
                 assert.equal(nextDataCell.state, 1);
                 assert.equal(domCell.classList.contains('alive'), true);
@@ -186,7 +186,7 @@ describe('Game of life', function() {
                 const neighbours = getAllNeighbours(game.grid, neighbourIndexes);
                 assert.equal(dataCell.state, 1);
                 assert.equal(domCell.classList.contains('alive'), true);
-                const nextDataCell = setCellLife(dataCell, neighbours);
+                const nextDataCell = setCellState(dataCell, neighbours);
                 setDomCellState(nextDataCell.state === 1, domCell);
                 assert.equal(nextDataCell.state, 0);
                 assert.equal(domCell.classList.contains('alive'), false);
@@ -205,7 +205,7 @@ describe('Game of life', function() {
                 const neighbours = getAllNeighbours(game.grid, neighbourIndexes);
                 assert.equal(dataCell.state, 1);
                 assert.equal(domCell.classList.contains('alive'), true);
-                const nextDataCell = setCellLife(dataCell, neighbours);
+                const nextDataCell = setCellState(dataCell, neighbours);
                 setDomCellState(nextDataCell.state === 1, domCell);
                 assert.equal(nextDataCell.state, 0);
                 assert.equal(domCell.classList.contains('alive'), false);
@@ -426,7 +426,7 @@ describe('Game of life', function() {
                 const neighbours = getAllNeighbours(game.grid, neighbourIndexes);
                 assert.equal(dataCell.state, 0);
                 assert.equal(domCell.classList.contains('alive'), false);
-                const nextDataCell = setCellLife(dataCell, neighbours);
+                const nextDataCell = setCellState(dataCell, neighbours);
                 setDomCellState(nextDataCell.state === 1, domCell);
                 assert.equal(nextDataCell.state, 1);
                 assert.equal(domCell.classList.contains('alive'), true);
@@ -445,7 +445,7 @@ describe('Game of life', function() {
                 const neighbours = getAllNeighbours(game.grid, neighbourIndexes);
                 assert.equal(dataCell.state, 0);
                 assert.equal(domCell.classList.contains('alive'), false);
-                const nextDataCell = setCellLife(dataCell, neighbours);
+                const nextDataCell = setCellState(dataCell, neighbours);
                 setDomCellState(nextDataCell.state === 1, domCell);
                 assert.equal(nextDataCell.state, 0);
                 assert.equal(domCell.classList.contains('alive'), false);
@@ -465,7 +465,7 @@ describe('Game of life', function() {
                 const neighbours = getAllNeighbours(game.grid, neighbourIndexes);
                 assert.equal(dataCell.state, 1);
                 assert.equal(domCell.classList.contains('alive'), true);
-                const nextDataCell = setCellLife(dataCell, neighbours);
+                const nextDataCell = setCellState(dataCell, neighbours);
                 setDomCellState(nextDataCell.state === 1, domCell);
                 assert.equal(nextDataCell.state, 1);
                 assert.equal(domCell.classList.contains('alive'), true);
@@ -484,7 +484,7 @@ describe('Game of life', function() {
                 const neighbours = getAllNeighbours(game.grid, neighbourIndexes);
                 assert.equal(dataCell.state, 1);
                 assert.equal(domCell.classList.contains('alive'), true);
-                const nextDataCell = setCellLife(dataCell, neighbours);
+                const nextDataCell = setCellState(dataCell, neighbours);
                 setDomCellState(nextDataCell.state === 1, domCell);
                 assert.equal(nextDataCell.state, 0);
                 assert.equal(domCell.classList.contains('alive'), false);
@@ -506,7 +506,7 @@ describe('Game of life', function() {
                 const neighbours = getAllNeighbours(game.grid, neighbourIndexes);
                 assert.equal(dataCell.state, 1);
                 assert.equal(domCell.classList.contains('alive'), true);
-                const nextDataCell = setCellLife(dataCell, neighbours);
+                const nextDataCell = setCellState(dataCell, neighbours);
                 setDomCellState(nextDataCell.state === 1, domCell);
                 assert.equal(nextDataCell.state, 0);
                 assert.equal(domCell.classList.contains('alive'), false);
@@ -532,7 +532,7 @@ describe('Game of life', function() {
                 const neighbours = getAllNeighbours(game.grid, neighbourIndexes);
                 assert.equal(dataCell.state, 1);
                 assert.equal(domCell.classList.contains('alive'), true);
-                const nextDataCell = setCellLife(dataCell, neighbours);
+                const nextDataCell = setCellState(dataCell, neighbours);
                 setDomCellState(nextDataCell.state === 1, domCell);
                 assert.equal(nextDataCell.state, 0);
                 assert.equal(domCell.classList.contains('alive'), false);
@@ -558,7 +558,7 @@ describe('Game of life', function() {
                 const neighbours = getAllNeighbours(game.grid, neighbourIndexes);
                 assert.equal(dataCell.state, 1);
                 assert.equal(domCell.classList.contains('alive'), true);
-                const nextDataCell = setCellLife(dataCell, neighbours);
+                const nextDataCell = setCellState(dataCell, neighbours);
                 setDomCellState(nextDataCell.state === 1, domCell);
                 assert.equal(nextDataCell.state, 0);
                 assert.equal(domCell.classList.contains('alive'), false);
